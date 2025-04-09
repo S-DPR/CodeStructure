@@ -8,14 +8,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
 @ToString
 public class EntityB {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    Integer fk;
+    UUID id;
+    UUID entityAId;
     Integer data;
 }

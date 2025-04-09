@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EntityAService {
@@ -19,7 +20,15 @@ public class EntityAService {
         return entityARepos.save(entityA);
     }
 
-    public Optional<EntityA> findById(int id) {
+    public EntityA findOrSave(EntityA entityA) {
+        boolean isExist = existsById(entityA.getId());
+        if (isExist) {
+            return entityA;
+        }
+        return save(entityA);
+    }
+
+    public Optional<EntityA> findById(UUID id) {
         return entityARepos.findById(id);
     }
 
@@ -27,7 +36,11 @@ public class EntityAService {
         return entityARepos.findAll();
     }
 
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         entityARepos.deleteById(id);
+    }
+
+    public boolean existsById(UUID id) {
+        return entityARepos.existsById(id);
     }
 }

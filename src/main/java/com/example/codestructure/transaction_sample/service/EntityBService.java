@@ -3,9 +3,11 @@ package com.example.codestructure.transaction_sample.service;
 import com.example.codestructure.transaction_sample.entity.EntityB;
 import com.example.codestructure.transaction_sample.repos.EntityBRepos;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EntityBService {
@@ -15,11 +17,12 @@ public class EntityBService {
         this.entityBRepos = entityBRepos;
     }
 
+    @Transactional
     public EntityB save(EntityB entityB) {
         return entityBRepos.save(entityB);
     }
 
-    public Optional<EntityB> findById(int id) {
+    public Optional<EntityB> findById(UUID id) {
         return entityBRepos.findById(id);
     }
 
@@ -27,7 +30,11 @@ public class EntityBService {
         return entityBRepos.findAll();
     }
 
-    public void deleteById(int id) {
+    public void deleteById(UUID id) {
         entityBRepos.deleteById(id);
+    }
+
+    public boolean existsByEntityAId(UUID entityAId) {
+        return entityBRepos.existsByEntityAId(entityAId);
     }
 }

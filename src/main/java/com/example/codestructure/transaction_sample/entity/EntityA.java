@@ -1,12 +1,12 @@
 package com.example.codestructure.transaction_sample.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -14,8 +14,6 @@ import lombok.ToString;
 @ToString
 public class EntityA {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    Integer fk;
+    UUID id;
     Integer data;
 }
