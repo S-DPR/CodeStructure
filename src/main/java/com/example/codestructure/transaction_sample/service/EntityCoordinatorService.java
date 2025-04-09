@@ -28,7 +28,7 @@ public class EntityCoordinatorService {
             entityA.setId(entityAId);
         }
         entityB.setEntityAId(entityAId);
-        return new Entities(entityA, entityB);
+        return entities;
     }
 
     @Transactional
