@@ -15,7 +15,7 @@ import lombok.ToString;
 public class EntityA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    int fk;
-    int data;
+    Integer id;
+    Integer fk;
+    Integer data;
 }

@@ -26,4 +26,8 @@ public class EntityAService {
     public List<EntityA> findAll() {
         return entityARepos.findAll();
     }
+
+    public void deleteById(int id) {
+        entityARepos.deleteById(id);
+    }
 }
