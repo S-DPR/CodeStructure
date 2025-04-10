@@ -16,7 +16,6 @@ import java.util.UUID;
 @ToString
 public class EntityA {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
     Integer data;
 }

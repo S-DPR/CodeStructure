@@ -33,10 +33,7 @@ public class EntityAService {
     }
 
     public EntityA findOrSave(EntityA entityA) {
-        if (entityA.getId() != null) {
-            return entityARepos.findById(entityA.getId())
-                    .orElseGet(() -> entityARepos.save(entityA));
-        }
-        return entityARepos.save(entityA);
+        return entityARepos.findById(entityA.getId())
+                .orElseGet(() -> save(entityA));
     }
 }
