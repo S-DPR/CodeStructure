@@ -43,13 +43,10 @@ public class EntityCoordinatorService {
     public void delete(Entities entities) {
         entities = prepareEntitiesFKField(entities);
 
-        UUID aId = entities.getEntityA().getId();
-        UUID bId = entities.getEntityB().getId();
-
-        entityBService.deleteById(bId);
-        boolean stillUsed = entityBService.existsByEntityAId(aId);
+        entityBService.deleteById(entities.getEntityB().getId());
+        boolean stillUsed = entityBService.existsByEntityAId(entities.getEntityB().getEntityAId());
         if (!stillUsed) {
-            entityAService.deleteById(aId);
+            entityAService.deleteById(entities.getEntityA().getId());
         }
     }
 }

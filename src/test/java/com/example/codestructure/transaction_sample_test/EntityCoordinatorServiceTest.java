@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @SpringBootTest
-@Transactional
 class EntityCoordinatorServiceTest {
 
     @Autowired
@@ -29,6 +29,7 @@ class EntityCoordinatorServiceTest {
     EntityBRepos entityBRepos;
 
     @Test
+    @Transactional
     void save_성공_동시에_넣기_동작확인() {
         // given
         EntityA entityA = new EntityA();
@@ -55,6 +56,7 @@ class EntityCoordinatorServiceTest {
     }
 
     @Test
+    @Transactional
     void save_성공_A가_같은_요소를_동시에_두개_넣기_동작확인() {
         // given
         UUID prepareEntityAId = UUID.randomUUID();
@@ -97,6 +99,7 @@ class EntityCoordinatorServiceTest {
     }
 
     @Test
+    @Transactional
     void delete_정상삭제_동작확인() {
         // given
         EntityA entityA = new EntityA();
@@ -120,6 +123,7 @@ class EntityCoordinatorServiceTest {
     }
 
     @Test
+    @Transactional
     void delete_EntityB_남아있으면_EntityA_삭제되지않음() {
         // given
         EntityA entityA = new EntityA();
@@ -144,5 +148,78 @@ class EntityCoordinatorServiceTest {
         // then
         assertThat(entityBRepos.existsById(savedB2.getId())).isTrue();    // 다른 B는 남아있음
         assertThat(entityARepos.existsById(aId)).isTrue();                // A는 삭제되면 안 됨
+    }
+
+    @Test
+    void save_중간에에러나면_모두롤백됨() {
+        // given
+        UUID id = UUID.randomUUID();
+        EntityA entityA = new EntityA();
+        entityA.setId(id);
+        entityA.setData(11);
+
+        EntityB entityB = new EntityB();
+        entityB.setId(UUID.randomUUID());
+        entityB.setEntityAId(id);
+        entityB.setData(22);
+
+        // when
+        assertThatThrownBy(() -> {
+            coordinatorService.save(new Entities(entityA, throwOnGet(entityB)));
+        }).isInstanceOf(RuntimeException.class);
+
+        // then
+        assertThat(entityARepos.findById(id)).isEmpty(); // 롤백됐어야 함
+        assertThat(entityBRepos.findById(entityB.getId())).isEmpty();
+    }
+
+    @Test
+    void delete_중간에에러나면_모두롤백됨() {
+        // given
+        UUID aId = UUID.randomUUID();
+
+        EntityA entityA = new EntityA();
+        entityA.setId(aId);
+        entityA.setData(100);
+
+        EntityB entityB = new EntityB();
+        entityB.setEntityAId(aId);
+        entityB.setData(200);
+
+        entityARepos.save(entityA);
+        entityBRepos.save(entityB);
+
+        // when
+
+        Entities entities = new Entities(entityA, throwOnGet(entityB));
+
+        // 예외 발생을 위해 CoordinatorService 내부 existsByEntityAId 호출에서 예외 발생시킴
+        assertThatThrownBy(() -> {
+            coordinatorService.delete(entities);
+        }).isInstanceOf(RuntimeException.class);
+
+        // then: 둘 다 롤백돼야 함
+        assertThat(entityARepos.findById(aId)).isPresent();
+        assertThat(entityBRepos.findById(entities.getEntityB().getId())).isPresent();
+    }
+
+    // get 메소드 사용시 에러나는 EntityB 객체
+    private EntityB throwOnGet(EntityB origin) {
+        return new EntityB() {
+            @Override
+            public Integer getData() {
+                throw new RuntimeException("일부러 터트림");
+            }
+
+            @Override
+            public UUID getId() {
+                return origin.getId();
+            }
+
+            @Override
+            public UUID getEntityAId() {
+                throw new RuntimeException("일부러 터트림");
+            }
+        };
     }
 }
