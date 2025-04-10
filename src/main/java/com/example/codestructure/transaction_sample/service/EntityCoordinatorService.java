@@ -46,10 +46,8 @@ public class EntityCoordinatorService {
         UUID aId = entities.getEntityA().getId();
         UUID bId = entities.getEntityB().getId();
 
-        EntityA lockedA = entityAService.findByIdWithLock(aId)
-                .orElseThrow(() -> new IllegalStateException("EntityA not found"));
         entityBService.deleteById(bId);
-        boolean stillUsed = entityBService.existsByEntityAId(lockedA.getId());
+        boolean stillUsed = entityBService.existsByEntityAId(aId);
         if (!stillUsed) {
             entityAService.deleteById(aId);
         }
