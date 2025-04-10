@@ -12,8 +12,4 @@ import lombok.*;
 public class Entities {
     private EntityA entityA;
     private EntityB entityB;
-
-    public boolean validate() {
-        return entityA != null && entityB != null && entityB.getEntityAId() != null;
-    }
 }
