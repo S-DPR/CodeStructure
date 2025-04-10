@@ -17,7 +17,6 @@ public class EntityBService {
         this.entityBRepos = entityBRepos;
     }
 
-    @Transactional
     public EntityB save(EntityB entityB) {
         return entityBRepos.save(entityB);
     }
@@ -34,7 +33,8 @@ public class EntityBService {
         entityBRepos.deleteById(id);
     }
 
+    @Transactional
     public boolean existsByEntityAId(UUID entityAId) {
-        return entityBRepos.existsByEntityAId(entityAId);
+        return !entityBRepos.findByEntityAIdWithLock(entityAId).isEmpty();
     }
 }

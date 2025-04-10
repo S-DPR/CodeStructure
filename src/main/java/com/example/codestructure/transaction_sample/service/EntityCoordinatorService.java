@@ -42,10 +42,16 @@ public class EntityCoordinatorService {
     @Transactional
     public void delete(Entities entities) {
         entities = prepareEntitiesFKField(entities);
-        entityBService.deleteById(entities.getEntityB().getId());
-        boolean isUsingA = entityBService.existsByEntityAId(entities.getEntityB().getEntityAId());
-        if (!isUsingA) {
-            entityAService.deleteById(entities.getEntityA().getId());
+
+        UUID aId = entities.getEntityA().getId();
+        UUID bId = entities.getEntityB().getId();
+
+        EntityA lockedA = entityAService.findByIdWithLock(aId)
+                .orElseThrow(() -> new IllegalStateException("EntityA not found"));
+        entityBService.deleteById(bId);
+        boolean stillUsed = entityBService.existsByEntityAId(lockedA.getId());
+        if (!stillUsed) {
+            entityAService.deleteById(aId);
         }
     }
 }
