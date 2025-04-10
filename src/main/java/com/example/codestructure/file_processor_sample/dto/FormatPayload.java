@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 @ToString
 public class FormatPayload {
     Node xml;
+    // 포맷이 늘어날때마다 추가..
 
     public boolean hasXml() {
         return xml != null;

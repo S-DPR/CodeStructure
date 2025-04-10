@@ -1,6 +1,6 @@
 package com.example.codestructure.file_processor_sample_test;
 
-import com.example.codestructure.file_processor_sample.Dispatcher;
+import com.example.codestructure.file_processor_sample.dispatcher.Dispatcher;
 import com.example.codestructure.file_processor_sample.entity.DataInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;

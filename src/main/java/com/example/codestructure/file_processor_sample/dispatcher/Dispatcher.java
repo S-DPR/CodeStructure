@@ -1,4 +1,4 @@
-package com.example.codestructure.file_processor_sample;
+package com.example.codestructure.file_processor_sample.dispatcher;
 
 import com.example.codestructure.file_processor_sample.abstracts.FileProcessor;
 import com.example.codestructure.file_processor_sample.dto.FormatPayload;
@@ -13,9 +13,11 @@ import java.util.List;
 @Component
 public class Dispatcher {
     private final List<FileProcessor> strategies;
+    private final FormatPayloadFactory payloadFactory;
 
-    public Dispatcher(List<FileProcessor> fileProcessors) {
+    public Dispatcher(List<FileProcessor> fileProcessors, FormatPayloadFactory payloadFactory) {
         strategies = fileProcessors;
+        this.payloadFactory = payloadFactory;
     }
 
     public DataInfo getDataInfo(byte[] file) {
@@ -24,7 +26,7 @@ public class Dispatcher {
             return new DataInfo();
         }
 
-        FormatPayload support = getSupportFormat(file);
+        FormatPayload support = payloadFactory.detect(file);
         FileProcessor extractor = strategies.stream()
                 .filter(current -> current.canHandle(support))
                 .findFirst()
@@ -34,22 +36,5 @@ public class Dispatcher {
         }
         log.warn("추출 실패 : 지원 파일 여부 확인 필요");
         return new DataInfo();
-    }
-
-    private FormatPayload getSupportFormat(byte[] file) {
-        FormatPayload formatPayload = new FormatPayload();
-        try {
-            Node xml = getNode(file);
-            formatPayload.setXml(xml.getParentNode());
-        } catch (Exception e) {
-            log.info("XML 아님");
-        }
-        //...
-        return formatPayload;
-    }
-
-    private Node getNode(byte[] file) throws Exception {
-        // MOCK: 실제 구현 생략
-        return null;
     }
 }
