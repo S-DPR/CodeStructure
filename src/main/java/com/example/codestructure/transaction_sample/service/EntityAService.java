@@ -33,11 +33,10 @@ public class EntityAService {
     }
 
     public EntityA findOrSave(EntityA entityA) {
-        UUID id = entityA.getId();
-        if (id == null) {
-            throw new IllegalArgumentException("EntityA ID가 비어있음");
+        if (entityA.getId() != null) {
+            return entityARepos.findById(entityA.getId())
+                    .orElseGet(() -> entityARepos.save(entityA));
         }
-        return entityARepos.findById(entityA.getId())
-                .orElseGet(() -> entityARepos.save(entityA));
+        return entityARepos.save(entityA);
     }
 }
