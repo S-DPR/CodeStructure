@@ -26,10 +26,10 @@ public class XMLFileExtractor extends XMLFileProcessor {
     }
 
     @Override
-    public boolean canHandle(FormatPayload formatPayload) {
-        if (!formatPayload.hasXml()) return false;
+    public boolean canHandle(FormatPayload payload) {
+        if (!payload.hasXml()) return false;
         try {
-            String name = readAtPath(formatPayload.getXml(), getNamePath());
+            String name = readAtPath(payload.getXml(), getNamePath());
             return "EXPECTED_SATELLITE_NAME".equals(name);
         } catch (Exception e) {
             return false;

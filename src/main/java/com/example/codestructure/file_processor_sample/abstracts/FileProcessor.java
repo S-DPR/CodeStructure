@@ -10,5 +10,5 @@ public abstract class FileProcessor<T> {
 
     protected abstract String getNamePath();
 
-    public abstract boolean canHandle(FormatPayload formatPayload);
+    public abstract boolean canHandle(FormatPayload payload);
 }
