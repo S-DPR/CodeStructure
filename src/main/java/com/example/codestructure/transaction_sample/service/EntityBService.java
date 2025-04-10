@@ -3,7 +3,6 @@ package com.example.codestructure.transaction_sample.service;
 import com.example.codestructure.transaction_sample.entity.EntityB;
 import com.example.codestructure.transaction_sample.repos.EntityBRepos;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +32,7 @@ public class EntityBService {
         entityBRepos.deleteById(id);
     }
 
-    @Transactional
     public boolean existsByEntityAId(UUID entityAId) {
-        return !entityBRepos.findByEntityAIdWithLock(entityAId).isEmpty();
+        return entityBRepos.existsByEntityAId(entityAId);
     }
 }
