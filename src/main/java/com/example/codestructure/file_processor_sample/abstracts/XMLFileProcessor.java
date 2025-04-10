@@ -1,6 +1,6 @@
-package com.example.codestructure.extractor_sample.abstracts;
+package com.example.codestructure.file_processor_sample.abstracts;
 
-import com.example.codestructure.extractor_sample.dto.FormatPayload;
+import com.example.codestructure.file_processor_sample.dto.FormatPayload;
 import org.w3c.dom.Node;
 
 import java.util.List;

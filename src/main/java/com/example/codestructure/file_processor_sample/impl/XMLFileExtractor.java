@@ -1,8 +1,8 @@
-package com.example.codestructure.extractor_sample.impl;
+package com.example.codestructure.file_processor_sample.impl;
 
-import com.example.codestructure.extractor_sample.abstracts.XMLFileProcessor;
-import com.example.codestructure.extractor_sample.dto.FormatPayload;
-import com.example.codestructure.extractor_sample.entity.DataInfo;
+import com.example.codestructure.file_processor_sample.abstracts.XMLFileProcessor;
+import com.example.codestructure.file_processor_sample.dto.FormatPayload;
+import com.example.codestructure.file_processor_sample.entity.DataInfo;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Node;
 

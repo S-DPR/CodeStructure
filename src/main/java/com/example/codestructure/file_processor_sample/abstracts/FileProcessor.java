@@ -1,8 +1,8 @@
-package com.example.codestructure.extractor_sample.abstracts;
+package com.example.codestructure.file_processor_sample.abstracts;
 
 
-import com.example.codestructure.extractor_sample.dto.FormatPayload;
-import com.example.codestructure.extractor_sample.entity.DataInfo;
+import com.example.codestructure.file_processor_sample.dto.FormatPayload;
+import com.example.codestructure.file_processor_sample.entity.DataInfo;
 
 public abstract class FileProcessor<T> {
     public abstract DataInfo process(FormatPayload payload);

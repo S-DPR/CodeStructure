@@ -1,8 +1,8 @@
-package com.example.codestructure.extractor_sample;
+package com.example.codestructure.file_processor_sample;
 
-import com.example.codestructure.extractor_sample.abstracts.FileProcessor;
-import com.example.codestructure.extractor_sample.dto.FormatPayload;
-import com.example.codestructure.extractor_sample.entity.DataInfo;
+import com.example.codestructure.file_processor_sample.abstracts.FileProcessor;
+import com.example.codestructure.file_processor_sample.dto.FormatPayload;
+import com.example.codestructure.file_processor_sample.entity.DataInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Node;

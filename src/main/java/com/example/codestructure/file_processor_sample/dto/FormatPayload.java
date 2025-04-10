@@ -1,4 +1,4 @@
-package com.example.codestructure.extractor_sample.dto;
+package com.example.codestructure.file_processor_sample.dto;
 
 import lombok.Getter;
 import lombok.Setter;

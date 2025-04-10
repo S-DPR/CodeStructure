@@ -1,4 +1,4 @@
-package com.example.codestructure.extractor_sample.entity;
+package com.example.codestructure.file_processor_sample.entity;
 
 import lombok.Getter;
 import lombok.Setter;
