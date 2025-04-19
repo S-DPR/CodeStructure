@@ -31,7 +31,7 @@ public class FormatPayloadFactory {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            return builder.parse(new ByteArrayInputStream(data));
+            return builder.parse(new ByteArrayInputStream(data)).getFirstChild();
         } catch (Exception e) {
             log.warn("XML 파싱 실패", e);
             return null;
