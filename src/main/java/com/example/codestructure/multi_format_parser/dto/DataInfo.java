@@ -10,6 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DataInfo {
+    @Builder.Default
     private String name = "";
+    @Builder.Default
     private String filename = "";
 }
