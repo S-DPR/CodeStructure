@@ -40,7 +40,7 @@ public class ExampleBExtractor implements FileExtractor {
             Node root = payload.getXml();
             String firstName = xmlReader.readAtPath(root, "PROPERTIES/FIRST_NAME");
             String lastName = xmlReader.readAtPath(root, "PROPERTIES/LAST_NAME");
-            return "EXPECTED_VALUE_B".equals(firstName+" "+lastName);
+            return "EXPECTED_FIRSTNAME EXPECTED_LAST_NAME".equals(firstName+" "+lastName);
         } catch (Exception e) {
             return false;
         }
