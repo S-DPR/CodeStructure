@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ROOT>
+    <PROPERTIES>
+        <FIRST_NAME>EXPECTED_FIRSTNAME</FIRST_NAME>
+        <LAST_NAME>EXPECTED_LAST_NAME</LAST_NAME>
+        <FILENAME>file_b.xml</FILENAME>
+    </PROPERTIES>
+</ROOT>
