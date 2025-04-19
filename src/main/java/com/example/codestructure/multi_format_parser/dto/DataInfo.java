@@ -10,6 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DataInfo {
-    private String name;
-    private String filename;
+    private String name = "";
+    private String filename = "";
 }
