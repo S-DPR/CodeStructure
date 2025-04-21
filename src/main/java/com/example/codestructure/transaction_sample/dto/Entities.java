@@ -1,7 +1,7 @@
 package com.example.codestructure.transaction_sample.dto;
 
-import com.example.codestructure.transaction_sample.entity.EntityA;
-import com.example.codestructure.transaction_sample.entity.EntityB;
+import com.example.codestructure.transaction_sample.entity.Parent;
+import com.example.codestructure.transaction_sample.entity.Child;
 import lombok.*;
 
 @Getter
@@ -10,6 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Entities {
-    private EntityA entityA;
-    private EntityB entityB;
+    private Parent parent;
+    private Child child;
 }

@@ -14,8 +14,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class EntityA {
+public class Child {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
+    UUID parentId;
     Integer data;
 }
