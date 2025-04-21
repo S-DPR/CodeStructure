@@ -43,8 +43,8 @@ public class CoordinatorService {
     public void delete(Entities entities) {
         entities = prepareEntitiesFKField(entities);
         childService.deleteById(entities.getChild().getId());
-        boolean isUsing = childService.existsByEntityAId(entities.getChild().getParentId());
-        if (!isUsing) {
+        boolean isParentUsing = childService.existsByEntityAId(entities.getChild().getParentId());
+        if (!isParentUsing) {
             parentService.deleteById(entities.getParent().getId());
         }
     }
