@@ -22,12 +22,12 @@ public class CoordinatorService {
         Parent parent = entities.getParent();
         Child child = entities.getChild();
 
-        UUID perentId = parent.getId();
-        if (perentId == null) {
-            perentId = UUID.randomUUID();
-            parent.setId(perentId);
+        UUID parentId = parent.getId();
+        if (parentId == null) {
+            parentId = UUID.randomUUID();
+            parent.setId(parentId);
         }
-        child.setParentId(perentId);
+        child.setParentId(parentId);
         return entities;
     }
 
