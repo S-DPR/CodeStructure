@@ -1,4 +1,4 @@
-# Entity Coordination Sample
+# Transaction Sample
 ※ 해당 코드는 전체 프로젝트 구조를 단순화하여, 구조 설계 방식만 보여주는 예제입니다.
 실제 운영 코드는 별도 디렉토리/계층 구성으로 관리됩니다.
 
